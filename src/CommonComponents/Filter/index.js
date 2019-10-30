@@ -39,9 +39,14 @@ Filter.defaultProps = {
   placeholder: "Select a value"
 };
 
+const FilterShape = PropTypes.shape({
+  text: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+})
+
 Filter.propTypes = {
   title: PropTypes.string,
-  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  options: PropTypes.arrayOf(FilterShape).isRequired,
   onSelect: PropTypes.func.isRequired
 };
 

@@ -8,36 +8,31 @@ import formatter from "../../utils/formatter";
 
 const quotesURL = "http://www.mocky.io/v2/5dafc7fa2f00005c00c1363d​";
 const filterOptions = [
-    {
-      text: "Any",
-      value: ""
-    },
-    {
-      text: "Quote Created",
-      value: "created"
-    },
-    {
-      text: "Quote Requested",
-      value: "requested"
-    },
-    {
-      text: "Quote Accepted",
-      value: "accepted"
-    }
-  ];
+  {
+    text: "Any",
+    value: ""
+  },
+  {
+    text: "Quote Created",
+    value: "created"
+  },
+  {
+    text: "Quote Requested",
+    value: "requested"
+  },
+  {
+    text: "Quote Accepted",
+    value: "accepted"
+  }
+];
 
-export default function() {
+export default function () {
   const [quotes, updateQuotes] = useState([]);
   const [visibleQuotes, updateVisibleQuotes] = useState([]);
 
   const getQuotes = useCallback(async () => {
-    // const result = await axios(quotesURL);
-    const result = await new Promise(resolve => {
-      setTimeout(() => {
-        resolve(mockData);
-      }, 1000);
-    });
-    const formattedData = formatter(result);
+    const result = await axios(quotesURL);
+    const formattedData = formatter(result.data);
     console.log(formattedData);
     updateQuotes(formattedData);
     updateVisibleQuotes(formattedData);
@@ -52,13 +47,13 @@ export default function() {
     <Card size="default">
       <Row type="flex" justify="space-around">
         <Col span={16}>
-          <Filter options={filterOptions} placeholder="Quote Status" onSelect={onFilterSelect}/>
+          <Filter options={filterOptions} placeholder="Quote Status" onSelect={onFilterSelect} />
         </Col>
         <Col span={6}>
           <Button type="primary">Request Quote</Button>
         </Col>
       </Row>
-      <QuotesList quotes={visibleQuotes} getQuotes={getQuotes}/>
+      <QuotesList quotes={visibleQuotes} getQuotes={getQuotes} />
     </Card>
   );
 }

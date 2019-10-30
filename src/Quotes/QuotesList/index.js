@@ -38,10 +38,8 @@ const QuotesList = ({ quotes, getQuotes }) => {
     getQuotes();
   }, [getQuotes]);
 
-console.log(quotes, columns);
-
   return (
-    <div class="quotes-list">
+    <div className="quotes-list">
       {quotes.length ? (
         <Table
           pagination={false}
